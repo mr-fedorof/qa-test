@@ -1,0 +1,65 @@
+<div class="alert alert-info result-alert" *ngIf="alertOpen">
+  <strong>FINISHED!</strong> You should check in on some of those fields below.
+  <button type="button" class="close">
+    <span aria-hidden="true" (click)="showAlert(false)">&times;</span>
+  </button>
+</div>
+
+<div class="page">
+  <div class="page__left">
+   <div class="toolbar">
+     <button
+       type="button"
+       class="btn btn-primary update-report-panel-button"
+       (click)="onUpdateReportPanelButtonClick()"
+     >Open Report Update Panel</button>
+   </div>
+
+    <div class="content">
+      <div class="report" [innerHtml]="content"></div>
+    </div>
+  </div>
+
+  <div class="page__right">
+
+    <div class="report-update-panel" *ngIf="panelOpen">
+      <div class="report-update-panel__header">
+        <h3>Report Update Panel</h3>
+        <button
+          type="button"
+          class="btn btn-sm btn-info report-update-panel__close-button"
+          (click)="onReportPanelCloseButtonClick()"
+        >close</button>
+      </div>
+
+      <div class="report-update-panel__content">
+        <div class="report-content-item-list" *ngIf="!updating && !loading">
+          <div *ngFor="let item of items" class="report-content-item" [attr.report-content-item]="item.value">
+            <div class="report-content-item__name">{{ item.name }}</div>
+            <div class="report-content-item__action">
+              <button
+                type="button"
+                class="btn btn-sm btn-primary insert-report-content-item-button"
+                (click)="onInsertItemClick(item.value)"
+              >Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="spinner-layout" *ngIf="updating || loading">
+          <div class="spinner-border"></div>
+        </div>
+      </div>
+
+      <div class="report-update-panel__footer">
+        <button
+          type="button"
+          class="btn btn-primary full-update-report-button"
+          (click)="onFullUpdateButtonClick()"
+          [disabled]="updating || loading"
+        >Full Update Report</button>
+      </div>
+    </div>
+
+  </div>
+</div>
