@@ -93,7 +93,7 @@ export class AppComponent implements OnInit {
   public content = '<p>Content...</p>';
 
   public onInsertItemClick(itemValue: any) {
-    this.content += `<p>Inserted ${itemValue} [CONTENT]</p>`;
+    this.content += `<p>Inserted ${itemValue} [PLACEHOLDER]</p>`;
   }
 
   public onUpdateReportPanelButtonClick() {
@@ -110,6 +110,7 @@ export class AppComponent implements OnInit {
 
     timer(5000).subscribe(() => {
       this.updating = false;
+      this.content = this.content.replaceAll('[PLACEHOLDER]', '[CONTENT]');
       this.showAlert(true);
     })
   }
